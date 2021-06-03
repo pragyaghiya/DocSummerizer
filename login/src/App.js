@@ -5,7 +5,6 @@ import { useState,useEffect } from 'react';
 import fire from './fire';
 import Login from './login';
 import Home from './home';
-import 'bootstrap/dist/css/bootstrap.css';
 
 const App = ()=>{
   const [user, setUser] = useState();
