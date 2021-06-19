@@ -26,20 +26,20 @@ const Login =(props) =>{
     const handleLogin = () => {
       clearErrors();
       fire
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch(err => {
-        switch(err.code){
-          case "auth/Invalid-email":
-          case "auth/user-disable":
-          case "auth/user-not-found":
-            setEmailError(err.message);
-            break;
+        .auth()
+        .signInWithEmailAndPassword(email, password) //what is this bachhin with email & password right? ha ok lol
+        .catch((err) => {
+          switch (err.code) {
+            case "auth/Invalid-email":
+            case "auth/user-disable":
+            case "auth/user-not-found":
+              setEmailError(err.message);
+              break;
             case "auth/wrong-password":
               setPasswordError(err.message);
               break;
-        }
-      });
+          }
+        });
     };
 
   
@@ -78,46 +78,54 @@ const Login =(props) =>{
   },[user]);
 
     
-    return(
-        <section className="login">
+    return (
+      <section className="login">
         <div className="loginContainer">
-            <label>Username</label>
-            <input
+          <label>Email</label>
+          <input
             type="text"
             autoFocus
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            />
-            <p className="errorMsg">{emailError}</p>
-            <label>Password</label>
-            <input
+          />
+          <p className="errorMsg">{emailError}</p>
+          <label>Password</label>
+          <input
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            />
-            <p className="errorMsg">{passwordError}</p>
+          />
+          <p className="errorMsg">{passwordError}</p>
 
-            
-            <div className="btnContainer">
-                {hasAccount ? (
-                    <div>
-                    <button onClick={handleLogin}>Sign in</button>
-                    
-                    <p>Don't have an account? <span onClick={()=> setHasAccount(false)}>Sign up</span></p>
-                    </div>
-                ) : (
-                    <div>
-                    <button style={{backgroundColor:'blueviolet'}} onClick={handleSignup}>Sign up</button>
-                    <p>Have an account? <span onClick={()=> setHasAccount(true)}>Sign in</span></p>
-                    </div>
-                )
-                }
-            </div>
+          <div className="btnContainer">
+            {hasAccount ? (
+              <div>
+                <button onClick={handleLogin}>Sign in</button>
+
+                <p>
+                  Don't have an account?{" "}
+                  <span onClick={() => setHasAccount(false)}>Sign up</span>
+                </p>
+              </div>
+            ) : (
+              <div>
+                <button
+                  style={{ backgroundColor: "blueviolet" }}
+                  onClick={handleSignup}
+                >
+                  Sign up
+                </button>
+                <p>
+                  Have an account?{" "}
+                  <span onClick={() => setHasAccount(true)}>Sign in</span>
+                </p>
+              </div>
+            )}
+          </div>
         </div>
-        </section>
-   
-    )
+      </section>
+    );
 }
 export default Login;
